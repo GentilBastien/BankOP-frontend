@@ -1,0 +1,21 @@
+<div class="flex">
+  <div class="flex flex-col">
+    <bankop-date (dateChanged)="startDateChanged($event)" [date]="currentFilters.minDate"></bankop-date>
+    <bankop-price (priceChanged)="minPriceChanged($event)" [price]="currentFilters.minPrice"></bankop-price>
+    <bankop-search (searchChanged)="searchChanged($event)" [search]="currentFilters.search"></bankop-search>
+  </div>
+  <div class="flex flex-col">
+    <bankop-date (dateChanged)="endDateChanged($event)" [date]="currentFilters.maxDate"></bankop-date>
+    <bankop-price (priceChanged)="maxPriceChanged($event)" [price]="currentFilters.maxPrice"></bankop-price>
+    <bankop-chips (selectionChanged)="categoriesChanged($event)"
+                  *ngIf="categories$ | async; let categories"
+                  [categories]="categories"
+                  [selectedOptions]="currentFilters.selectedCategories"></bankop-chips>
+  </div>
+  <div class="flex flex-col">
+    <button color="primary" mat-stroked-button>Save this configuration</button>
+    <button (click)="resetFilters()" color="primary" mat-raised-button>Reset filters</button>
+  </div>
+</div>
+
+

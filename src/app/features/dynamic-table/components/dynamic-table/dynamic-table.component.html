@@ -1,0 +1,20 @@
+<table>
+  <thead>
+  <tr>
+    <th>nom table</th>
+    <th (click)="toggleHeader(header)"
+        *ngFor="let header of headers"
+        [colSpan]="header.selected ? 12 : 1">{{ header.year }}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td></td>
+    <td *ngFor="let monthName of monthNames">{{ monthName }}</td>
+  </tr>
+  <tr *ngFor="let table of tables" [class.expanded]="table.expanded">
+    <td (click)="toggleRow(table)">{{ table.tableName }}</td>
+    <td *ngFor="let i of numCols | range">{{ table.computedPrices[i] }}</td>
+  </tr>
+  </tbody>
+</table>

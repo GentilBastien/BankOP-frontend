@@ -1,0 +1,23 @@
+mat-expansion-panel {
+  background: #f9f9f9;
+}
+
+.table-container {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.row-header {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 2;
+}
+
+.b:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.b:nth-child(odd) {
+  background: white;
+}

@@ -1,0 +1,44 @@
+<div>
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Filters
+      </mat-panel-title>
+      <mat-panel-description>
+        No filter
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <filter-operation></filter-operation>
+  </mat-expansion-panel>
+
+  <div class="table-container">
+    <table (matSortChange)="sortChanged($event)" [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
+      <ng-container matColumnDef="date">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by date">Date</th>
+        <td *matCellDef="let element" mat-cell> {{element.date}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by name">Name</th>
+        <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by price">Price</th>
+        <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="path">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by category">Category</th>
+        <td *matCellDef="let element" mat-cell> {{element.path}} </td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" class="row-header" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns;" class="b" mat-row></tr>
+    </table>
+  </div>
+  <mat-paginator
+    [pageSizeOptions]="[50, dataSource.data.length]" showFirstLastButtons>
+  </mat-paginator>
+</div>
+

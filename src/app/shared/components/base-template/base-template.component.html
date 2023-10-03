@@ -1,0 +1,36 @@
+<mat-tab-group>
+  <mat-tab label="List">
+    <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table>
+      <ng-container *ngFor="let key of keys" [matColumnDef]="key">
+        <th *matHeaderCellDef mat-header-cell>{{key}}</th>
+        <td *matCellDef="let element" mat-cell> {{element[key]}} </td>
+      </ng-container>
+      <tr *matHeaderRowDef="keys" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: keys;" mat-row></tr>
+    </table>
+  </mat-tab>
+  <mat-tab label="Create">
+    <form [formGroup]="createFormGroup">
+      <ng-container *ngFor="let key of keys; let first = first">
+        <mat-form-field *ngIf="!first">
+          <mat-label>{{key}}</mat-label>
+          <input [formControlName]="key" [name]="key" [placeholder]="key" matInput type="text">
+        </mat-form-field>
+      </ng-container>
+      <button (click)="submitCreate()" [disabled]="createFormGroup.invalid" color="primary" mat-raised-button>Create
+      </button>
+    </form>
+  </mat-tab>
+  <mat-tab label="Delete">
+    <form [formGroup]="deleteFormGroup">
+      <mat-form-field>
+        <mat-label>id</mat-label>
+        <input formControlName="id" matInput name="id" placeholder="id" type="text">
+      </mat-form-field>
+      <button (click)="submitDelete()" [disabled]="deleteFormGroup.invalid" color="warn" mat-raised-button>Delete
+      </button>
+    </form>
+  </mat-tab>
+</mat-tab-group>
+
+
