@@ -2,7 +2,7 @@ import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {ApiService} from "./ApiService";
 import {BaseDto} from "../dtos/BaseDto";
-import {BaseMapper} from "../mappers/BaseMapper";
+import {BaseMapper} from "../mappers/base-mapper";
 import {BaseEntity} from "../entities/BaseEntity";
 
 export abstract class BaseService extends ApiService<BaseDto> {

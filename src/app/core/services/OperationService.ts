@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {OperationMapper} from "../mappers/OperationMapper";
+import {OperationMapper} from "../mappers/operation-mapper";
 import {BaseService} from "./BaseService";
 
 @Injectable({

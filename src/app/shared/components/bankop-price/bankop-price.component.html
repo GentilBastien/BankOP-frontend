@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline">
-  <mat-label>Amount</mat-label>
-  <input [formControl]="formControl" class="input-price" matInput placeholder="0" type="number">
+  <mat-label>{{ label }}</mat-label>
+  <input [formControl]="formControl" class="input-price" matInput placeholder="0" type="number" />
   <span matTextSuffix>&nbsp;€</span>
 </mat-form-field>

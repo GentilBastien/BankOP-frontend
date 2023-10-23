@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Hey</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <input [formControl]="formControl" matInput placeholder="Filter configuration name" />
+    <mat-error *ngIf="formControl.hasError('required')">You must enter a value</mat-error>
+    <mat-error *ngIf="formControl.hasError('minlength')">The name is too short</mat-error>
+    <mat-error *ngIf="formControl.hasError('maxlength')">The name is too long</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="onCancelClick()" mat-button>Cancel</button>
+  <button (click)="onSubmitClick()" [disabled]="formControl.invalid" color="primary" mat-raised-button>Submit</button>
+</mat-dialog-actions>

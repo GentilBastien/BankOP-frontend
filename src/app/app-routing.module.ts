@@ -19,8 +19,12 @@ const routes: Routes = [
     loadChildren: () => import('./features/dynamic-table/dynamic-table.module').then(m => m.DynamicTableModule),
   },
   {
+    path: 'import',
+    loadChildren: () => import('./features/import/import.module').then(m => m.ImportModule),
+  },
+  {
     path: 'releve',
-    loadChildren: () => import('./features/historic/historic.module').then(m => m.HistoricModule),
+    loadChildren: () => import('./features/releve/releve.module').then(m => m.ReleveModule),
   }
 ];
 

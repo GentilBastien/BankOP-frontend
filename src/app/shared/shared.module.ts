@@ -7,7 +7,7 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatInputModule} from "@angular/material/input";
 import {MatDialogModule} from "@angular/material/dialog";
-import {ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatCardModule} from "@angular/material/card";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatSelectModule} from "@angular/material/select";
@@ -48,7 +48,9 @@ const materialModules = [
   MatTabsModule,
   MatExpansionModule,
   MatNativeDateModule,
-  MatDatepickerModule
+  MatDatepickerModule,
+  FormsModule,
+  MatDialogModule
 ];
 
 const components = [BaseTemplateComponent, BankopDateComponent, BankopSearchComponent, BankopChipsComponent, BankopPriceComponent];

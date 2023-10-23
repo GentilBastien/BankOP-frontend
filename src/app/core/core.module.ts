@@ -1,10 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AbstractMapper} from "./mappers/AbstractMapper";
-import {BaseMapper} from "./mappers/BaseMapper";
-import {KeywordMapper} from "./mappers/KeywordMapper";
-import {OperationMapper} from "./mappers/OperationMapper";
-import {TableMapper} from "./mappers/TableMapper";
+import {BaseMapper} from "./mappers/base-mapper";
+import {KeywordMapper} from "./mappers/keyword-mapper";
+import {OperationMapper} from "./mappers/operation-mapper";
+import {TableMapper} from "./mappers/table-mapper";
 import {HttpClientModule} from "@angular/common/http";
 
 const mappers = [

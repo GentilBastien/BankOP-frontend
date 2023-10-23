@@ -1,6 +1,7 @@
 import {Moment} from "moment";
 
-export interface HistoricFilter {
+export interface ReleveFilter {
+  name?: string;
   minDate?: Moment;
   maxDate?: Moment;
   minPrice?: number;
@@ -9,7 +10,8 @@ export interface HistoricFilter {
   selectedCategories: string[];
 }
 
-export const DEFAULT_HISTORIC_FILTER = (): HistoricFilter => ({
+export const DEFAULT_HISTORIC_FILTER = (): ReleveFilter => ({
+  name: undefined,
   minDate: undefined,
   maxDate: undefined,
   minPrice: undefined,

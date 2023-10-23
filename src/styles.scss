@@ -1,15 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  
+
 }
 
-html, body {
-  height: 100%;
-}
-
-body {
+body, html {
   margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  overflow: hidden;
+  user-select: none;
+}
+
+.mdc-notched-outline__notch {
+  border-right: none !important;
 }

@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {FormControl} from "@angular/forms";
-import {MatDatepicker} from "@angular/material/datepicker";
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDatepicker } from '@angular/material/datepicker';
 
-import * as _moment from 'moment';
-import _rollupMoment, {Moment} from 'moment';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material/core";
-import {MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter} from "@angular/material-moment-adapter";
-import {tap} from "rxjs";
+import _moment from 'moment';
+import _rollupMoment, { Moment } from 'moment';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MomentDateAdapter } from '@angular/material-moment-adapter';
+import { tap } from 'rxjs';
 
 const moment = _rollupMoment || _moment;
 
@@ -22,7 +22,6 @@ export const MY_FORMATS = {
   },
 };
 
-
 @Component({
   selector: 'bankop-date',
   templateUrl: './bankop-date.component.html',
@@ -33,19 +32,21 @@ export const MY_FORMATS = {
       useClass: MomentDateAdapter,
       deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
-    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+    { provide: MAT_DATE_FORMATS, useValue: MY_FORMATS },
   ],
   encapsulation: ViewEncapsulation.None,
 })
 export class BankopDateComponent implements OnChanges {
   @Input() date: Moment | undefined;
-  @Output() dateChanged: EventEmitter<Moment> = new EventEmitter<Moment>();
-  protected formControl: FormControl = new FormControl();
+  @Input() label: string;
+  @Output() dateChanged: EventEmitter<Moment>;
+  protected formControl: FormControl;
 
   constructor() {
-    this.formControl.valueChanges.pipe(
-      tap(moment => this.dateChanged.emit(moment))
-    ).subscribe();
+    this.label = '';
+    this.dateChanged = new EventEmitter<Moment>();
+    this.formControl = new FormControl();
+    this.formControl.valueChanges.pipe(tap(moment => this.dateChanged.emit(moment))).subscribe();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -56,7 +57,7 @@ export class BankopDateComponent implements OnChanges {
   }
 
   protected setMonthAndYear(event$: Moment, datepicker: MatDatepicker<Moment>): void {
-    let oneMoment: Moment = moment();
+    const oneMoment: Moment = moment();
     oneMoment.month(event$.month());
     oneMoment.year(event$.year());
     this.formControl.setValue(oneMoment);

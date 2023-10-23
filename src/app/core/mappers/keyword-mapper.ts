@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BaseMapper} from "./BaseMapper";
+import {BaseMapper} from "./base-mapper";
 
 @Injectable({
   providedIn: 'root',

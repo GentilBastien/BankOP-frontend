@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {KeywordMapper} from "../mappers/KeywordMapper";
+import {KeywordMapper} from "../mappers/keyword-mapper";
 import {BaseService} from "./BaseService";
 
 @Injectable({

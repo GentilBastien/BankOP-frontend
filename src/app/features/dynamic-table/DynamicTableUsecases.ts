@@ -4,6 +4,8 @@ import {DynamicTableStore} from "./DynamicTableStore";
 import {Observable} from "rxjs";
 import {TreePriceTableDto} from "../../core/dtos/dynamic-table/TreePriceTableDto";
 
+const monthNames: string[] = ['dec', 'nov', 'oct', 'sept', 'août', 'juil', 'juin', 'mai', 'avr', 'mars', 'fév', 'jan'];
+
 @Injectable()
 export class DynamicTableUsecases {
 
@@ -31,7 +33,6 @@ export class DynamicTableUsecases {
   }
 
   public computesMonthNames(headers: DynamicTableHeader[]): string[] {
-    const monthNames: string[] = ['dec', 'nov', 'oct', 'sept', 'août', 'juil', 'juin', 'mai', 'avr', 'mars', 'fév', 'jan'];
     return headers.map(header => header.selected ? monthNames : '').flat();
   }
 }
