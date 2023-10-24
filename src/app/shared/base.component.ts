@@ -20,7 +20,7 @@ export abstract class BaseComponent {
         tap(baseEntities => (this.dataSource = new MatTableDataSource<CrudBaseEntity>(baseEntities)))
       )
       .subscribe();
-    this.createFormGroup = this.createDynamicCreateFormGroup();
+    this.createFormGroup = this.createDynamicFormGroup();
     this.deleteFormGroup = this.fb.group({
       id: ['', Validators.required],
     });
@@ -44,8 +44,8 @@ export abstract class BaseComponent {
     }
   }
 
-  private createDynamicCreateFormGroup(): FormGroup {
-    const formGroupConfig: { [key: string]: any } = {};
+  private createDynamicFormGroup(): FormGroup {
+    const formGroupConfig: { [key: string]: string[] } = {};
     this.objKeys().forEach((key, index) => {
       if (index === 0) return;
       formGroupConfig[key] = [''];
