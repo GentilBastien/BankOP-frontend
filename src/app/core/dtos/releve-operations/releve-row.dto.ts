@@ -1,6 +1,6 @@
-import {Moment} from "moment";
+import { Moment } from 'moment';
 
-export interface ReleveRow {
+export interface ReleveRowDto {
   date: Moment;
   name: string;
   price: number;

@@ -1,8 +1,8 @@
-import {Injectable} from "@angular/core";
-import {ReleveOperationDto} from "../dtos/releve-operations/ReleveOperationDto";
-import {ReleveFilter} from "../../features/releve/releve-filter";
+import { Injectable } from '@angular/core';
+import { ReleveOperationDto } from '../dtos/releve-operations/releve-operation.dto';
+import { ReleveFilter } from '../../features/releve/releve-filter';
 import _moment from 'moment';
-import _rollupMoment, {Moment} from 'moment';
+import _rollupMoment, { Moment } from 'moment';
 
 const moment = _rollupMoment || _moment;
 
@@ -10,7 +10,6 @@ const moment = _rollupMoment || _moment;
   providedIn: 'root',
 })
 export class ReleveFilterMapper {
-
   public mapToReleveFilter(releve: ReleveOperationDto): ReleveFilter {
     const minDate: Moment = moment(releve.minDate).startOf('month');
     const maxDate: Moment = moment(releve.maxDate).endOf('month');
@@ -20,7 +19,7 @@ export class ReleveFilterMapper {
       minPrice: releve.minPrice,
       maxPrice: releve.maxPrice,
       search: '',
-      selectedCategories: []
-    }
+      selectedCategories: [],
+    };
   }
 }

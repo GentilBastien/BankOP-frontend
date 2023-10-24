@@ -1,16 +1,14 @@
-import {Injectable} from "@angular/core";
-import {DynamicTableHeader} from "./DynamicTableHeader";
-import {DynamicTableStore} from "./DynamicTableStore";
-import {Observable} from "rxjs";
-import {TreePriceTableDto} from "../../core/dtos/dynamic-table/TreePriceTableDto";
+import { Injectable } from '@angular/core';
+import { DynamicTableHeader } from './DynamicTableHeader';
+import { DynamicTableStore } from './DynamicTableStore';
+import { Observable } from 'rxjs';
+import { TreePriceTableDto } from '../../core/dtos/dynamic-table/tree-price-table.dto';
 
 const monthNames: string[] = ['dec', 'nov', 'oct', 'sept', 'août', 'juil', 'juin', 'mai', 'avr', 'mars', 'fév', 'jan'];
 
 @Injectable()
 export class DynamicTableUsecases {
-
-  constructor(private readonly dynamicTableStore: DynamicTableStore) {
-  }
+  constructor(private readonly dynamicTableStore: DynamicTableStore) {}
 
   public refreshDynamicTable(): Observable<void> {
     return this.dynamicTableStore.refreshDynamicTable();
@@ -33,6 +31,6 @@ export class DynamicTableUsecases {
   }
 
   public computesMonthNames(headers: DynamicTableHeader[]): string[] {
-    return headers.map(header => header.selected ? monthNames : '').flat();
+    return headers.map(header => (header.selected ? monthNames : '')).flat();
   }
 }

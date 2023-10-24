@@ -1,7 +1,7 @@
-import {OperationDto} from "../dtos/OperationDto";
-import {Operation} from "../entities/Operation";
-import {Injectable} from "@angular/core";
-import {BaseMapper} from "./base-mapper";
+import { OperationDto } from '../dtos/operation.dto';
+import { Operation } from '../entities/operation';
+import { Injectable } from '@angular/core';
+import { BaseMapper } from './base-mapper';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +13,9 @@ export class OperationMapper extends BaseMapper {
       idMother: dto.idMother,
       date: dto.date,
       price: dto.price,
-      manually_categorized: dto.manually_categorized
+      manually_categorized: dto.manually_categorized,
     };
-    return {...baseEntity, ...operationEntity};
+    return { ...baseEntity, ...operationEntity };
   }
 
   public override toDto(model: Operation): OperationDto {
@@ -24,9 +24,9 @@ export class OperationMapper extends BaseMapper {
       idMother: model.idMother,
       date: model.date,
       price: model.price,
-      manually_categorized: model.manually_categorized
+      manually_categorized: model.manually_categorized,
     };
-    return {...baseDto, ...operationDto};
+    return { ...baseDto, ...operationDto };
   }
 
   public override fromStringToDto(names: string[]): OperationDto {
@@ -37,7 +37,7 @@ export class OperationMapper extends BaseMapper {
       date: names[3],
       name: names[4],
       price: Number(names[5]),
-      manually_categorized: true
-    }
+      manually_categorized: true,
+    };
   }
 }

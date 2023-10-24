@@ -1,4 +1,4 @@
-import {PriceTableDto} from "./PriceTableDto";
+import { PriceTableDto } from './price-table.dto';
 
 export interface TreePriceTableDto {
   root?: PriceTableDto;

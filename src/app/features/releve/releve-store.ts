@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { returnVoid } from '../../shared/custom-operators/ReturnVoid';
 import { ReleveService } from '../../core/services/releve.service';
-import { ReleveRow } from '../../core/dtos/releve-operations/ReleveRow';
+import { ReleveRowDto } from '../../core/dtos/releve-operations/releve-row.dto';
 import { DEFAULT_HISTORIC_FILTER, ReleveFilter } from './releve-filter';
-import { ReleveOperationDto } from '../../core/dtos/releve-operations/ReleveOperationDto';
+import { ReleveOperationDto } from '../../core/dtos/releve-operations/releve-operation.dto';
 
 @Injectable()
 export class ReleveStore {
-  private operationsSubject: BehaviorSubject<ReleveRow[]> = new BehaviorSubject<ReleveRow[]>([]);
-  public operations$: Observable<ReleveRow[]> = this.operationsSubject.asObservable();
+  private operationsSubject: BehaviorSubject<ReleveRowDto[]> = new BehaviorSubject<ReleveRowDto[]>([]);
+  public operations$: Observable<ReleveRowDto[]> = this.operationsSubject.asObservable();
 
   private categoriesSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public categories$: Observable<string[]> = this.categoriesSubject.asObservable();

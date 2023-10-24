@@ -1,30 +1,29 @@
-import {AbstractMapper} from "./AbstractMapper";
-import {BaseDto} from "../dtos/BaseDto";
-import {BaseEntity} from "../entities/BaseEntity";
+import { AbstractMapper } from './abstract-mapper';
+import { CrudBaseDto } from '../dtos/crud-base.dto';
+import { CrudBaseEntity } from '../entities/crud-base.entity';
 
-export class BaseMapper extends AbstractMapper<BaseDto, BaseEntity> {
-
-  public fromDto(dto: BaseDto): BaseEntity {
+export class BaseMapper extends AbstractMapper<CrudBaseDto, CrudBaseEntity> {
+  public fromDto(dto: CrudBaseDto): CrudBaseEntity {
     return {
       id: dto.id,
       idCategory: dto.idCategory,
-      name: dto.name
-    }
+      name: dto.name,
+    };
   }
 
-  public toDto(model: BaseEntity): BaseDto {
+  public toDto(model: CrudBaseEntity): CrudBaseDto {
     return {
       id: model.id,
       idCategory: model.idCategory,
-      name: model.name
-    }
+      name: model.name,
+    };
   }
 
-  public fromStringToDto(names: string[]): BaseDto {
+  public fromStringToDto(names: string[]): CrudBaseDto {
     return {
       id: undefined,
       idCategory: Number(names[1]),
-      name: names[2]
-    }
+      name: names[2],
+    };
   }
 }

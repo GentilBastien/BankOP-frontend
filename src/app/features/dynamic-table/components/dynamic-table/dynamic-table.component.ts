@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {DynamicTableUsecases} from "../../DynamicTableUsecases";
-import {DynamicTableHeader} from "../../DynamicTableHeader";
-import {Observable, switchMap, tap} from "rxjs";
-import {returnVoid} from "../../../../shared/custom-operators/ReturnVoid";
-import {PriceTableDto} from "../../../../core/dtos/dynamic-table/PriceTableDto";
+import { Component, OnInit } from '@angular/core';
+import { DynamicTableUsecases } from '../../DynamicTableUsecases';
+import { DynamicTableHeader } from '../../DynamicTableHeader';
+import { Observable, switchMap, tap } from 'rxjs';
+import { returnVoid } from '../../../../shared/custom-operators/ReturnVoid';
+import { PriceTableDto } from '../../../../core/dtos/dynamic-table/price-table.dto';
 
 @Component({
   selector: 'app-dynamic-table',
   templateUrl: './dynamic-table.component.html',
-  styleUrls: ['./dynamic-table.component.scss']
+  styleUrls: ['./dynamic-table.component.scss'],
 })
 export class DynamicTableComponent implements OnInit {
   protected tables: PriceTableDto[] = [];
@@ -23,11 +23,14 @@ export class DynamicTableComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.dynamicTableUsecases.refreshDynamicTable().pipe(
-      switchMap(() => this.dynamicTableChanges()),
-      switchMap(() => this.headerChanges()),
-      tap(() => this.refreshPrices())
-    ).subscribe();
+    this.dynamicTableUsecases
+      .refreshDynamicTable()
+      .pipe(
+        switchMap(() => this.dynamicTableChanges()),
+        switchMap(() => this.headerChanges()),
+        tap(() => this.refreshPrices())
+      )
+      .subscribe();
   }
 
   protected toggleHeader(header: DynamicTableHeader): void {
@@ -44,7 +47,7 @@ export class DynamicTableComponent implements OnInit {
       if (table.children) {
         table.children.forEach(child => {
           count += 1 + countExpandedChildren(child);
-        })
+        });
       }
       return count;
     };
@@ -62,30 +65,33 @@ export class DynamicTableComponent implements OnInit {
 
   private refreshPrices(): void {
     this.tables.forEach(table => {
-      table.computedPrices = this.headers.map(header => header.selected
-        ? table.expanded
-          ? [...table.monthYearPrices[header.yearIndex]]
-          : [...table.cumulatedMonthYearPrices[header.yearIndex]]
-        : table.expanded
-          ? table.yearPrices[header.yearIndex]
-          : table.cumulatedYearPrices[header.yearIndex]
-      ).flat();
-    })
+      table.computedPrices = this.headers
+        .map(header =>
+          header.selected
+            ? table.expanded
+              ? [...table.monthYearPrices[header.yearIndex]]
+              : [...table.cumulatedMonthYearPrices[header.yearIndex]]
+            : table.expanded
+            ? table.yearPrices[header.yearIndex]
+            : table.cumulatedYearPrices[header.yearIndex]
+        )
+        .flat();
+    });
   }
 
   private headerChanges(): Observable<void> {
     return this.dynamicTableUsecases.headerChanges().pipe(
-      tap(headers => this.headers = headers),
-      tap(headers => this.numCols = this.dynamicTableUsecases.computesNumCols(headers)),
-      tap(headers => this.monthNames = this.dynamicTableUsecases.computesMonthNames(headers)),
+      tap(headers => (this.headers = headers)),
+      tap(headers => (this.numCols = this.dynamicTableUsecases.computesNumCols(headers))),
+      tap(headers => (this.monthNames = this.dynamicTableUsecases.computesMonthNames(headers))),
       returnVoid()
     );
   }
 
   private dynamicTableChanges(): Observable<void> {
     return this.dynamicTableUsecases.dynamicTableChanges().pipe(
-      tap(priceTable => this.tables = [priceTable.root!]),
+      tap(priceTable => (this.tables = [priceTable.root!])),
       returnVoid()
-    )
+    );
   }
 }

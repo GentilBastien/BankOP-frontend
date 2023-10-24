@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ReleveStore } from './releve-store';
 import { Observable } from 'rxjs';
-import { ReleveRow } from '../../core/dtos/releve-operations/ReleveRow';
+import { ReleveRowDto } from '../../core/dtos/releve-operations/releve-row.dto';
 import { ReleveFilter } from './releve-filter';
 import _moment from 'moment';
 import _rollupMoment from 'moment';
@@ -16,7 +16,7 @@ export class ReleveUsecases {
     return this.releveStore.refreshReleveOperations();
   }
 
-  public operationsChanges(): Observable<ReleveRow[]> {
+  public operationsChanges(): Observable<ReleveRowDto[]> {
     return this.releveStore.operations$;
   }
 
@@ -49,7 +49,7 @@ export class ReleveUsecases {
     this.releveStore.removeSavedFilter(filter);
   }
 
-  public filterOperations(rows: ReleveRow[], filters: ReleveFilter): ReleveRow[] {
+  public filterOperations(rows: ReleveRowDto[], filters: ReleveFilter): ReleveRowDto[] {
     return rows
       .filter(row => row.price >= (filters.minPrice ?? -Infinity))
       .filter(row => row.price <= (filters.maxPrice ?? Infinity))

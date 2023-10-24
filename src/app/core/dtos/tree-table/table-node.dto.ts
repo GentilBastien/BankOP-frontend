@@ -1,4 +1,4 @@
-import {TableDto} from "../TableDto";
+import { TableDto } from '../table.dto';
 
 export interface TableNodeDto {
   tableDTO: TableDto;

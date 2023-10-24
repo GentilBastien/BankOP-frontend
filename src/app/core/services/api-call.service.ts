@@ -1,9 +1,9 @@
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 const baseEndpoint: string = 'http://localhost:8080/api/v1/';
 
-export abstract class ApiService<DTO> {
+export abstract class ApiCallService<DTO> {
   private readonly endpointApi: string;
 
   protected constructor(
@@ -18,7 +18,7 @@ export abstract class ApiService<DTO> {
   }
 
   public getById(id: string): Observable<DTO> {
-    const url: string = this.endpointApi + "/" + id;
+    const url: string = this.endpointApi + '/' + id;
     return this.httpService.get<DTO>(url);
   }
 
@@ -31,7 +31,7 @@ export abstract class ApiService<DTO> {
   }
 
   public delete(id: string): Observable<void> {
-    const url: string = this.endpointApi + "/" + id;
+    const url: string = this.endpointApi + '/' + id;
     return this.httpService.delete<void>(url);
   }
 }

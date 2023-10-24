@@ -1,4 +1,4 @@
-export interface BaseDto {
+export interface CrudBaseEntity {
   id?: number;
   idCategory: number;
   name: string;

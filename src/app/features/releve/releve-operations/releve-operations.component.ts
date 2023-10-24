@@ -4,7 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { combineLatestWith, map, Observable, switchMap, tap } from 'rxjs';
 import { returnVoid } from '../../../shared/custom-operators/ReturnVoid';
 import { MatSort, Sort } from '@angular/material/sort';
-import { ReleveRow } from '../../../core/dtos/releve-operations/ReleveRow';
+import { ReleveRowDto } from '../../../core/dtos/releve-operations/releve-row.dto';
 import { MatPaginator } from '@angular/material/paginator';
 import { ReleveFilter } from '../releve-filter';
 
@@ -17,11 +17,11 @@ export class ReleveOperationsComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   protected displayedColumns: string[] = ['date', 'name', 'price', 'path'];
-  protected dataSource: MatTableDataSource<ReleveRow>;
+  protected dataSource: MatTableDataSource<ReleveRowDto>;
   protected nbCurrentFilters: number = 0;
 
   constructor(private readonly historicUsecases: ReleveUsecases) {
-    this.dataSource = new MatTableDataSource<ReleveRow>();
+    this.dataSource = new MatTableDataSource<ReleveRowDto>();
   }
 
   public ngOnInit(): void {
