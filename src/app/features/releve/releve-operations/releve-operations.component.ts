@@ -31,10 +31,7 @@ export class ReleveOperationsComponent implements OnInit, AfterViewInit {
       .subscribe();
     this.historicUsecases
       .filtersChanges()
-      .pipe(
-        tap((filters: ReleveFilter) => (this.nbCurrentFilters = this.historicUsecases.countSetFilters(filters))),
-        tap(() => console.log(this.nbCurrentFilters))
-      )
+      .pipe(tap((filters: ReleveFilter) => (this.nbCurrentFilters = this.historicUsecases.countSetFilters(filters))))
       .subscribe();
   }
 

@@ -18,6 +18,10 @@ mat-expansion-panel {
   background: #f9f9f9;
 }
 
+mat-expansion-panel-header {
+  @apply items-stretch;
+}
+
 .row-header {
   position: sticky;
   top: 0;
