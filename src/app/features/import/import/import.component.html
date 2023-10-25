@@ -1,4 +1,41 @@
 <div class="container">
-  <mat-label>Input</mat-label>
-  <input (change)="aze($event)" type="file">
+  <div class="element">
+    <button mat-raised-button (click)="openFileView()">Open file (.csv)</button>
+    <input type="file" id="fileInput" #fileInput (change)="filesChanged()" [multiple]="false" />
+  </div>
+
+  <div class="element shrinkable">
+    <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
+      <ng-container matColumnDef="doublon">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by doublon">Doublon</th>
+        <td *matCellDef="let element" mat-cell>{{ true }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="date">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by date">Date</th>
+        <td *matCellDef="let element" mat-cell>{{ element.date }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by name">Name</th>
+        <td *matCellDef="let element" mat-cell>{{ element.name }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="price">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by price">Price</th>
+        <td *matCellDef="let element" mat-cell>{{ element.price }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="path">
+        <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by category">Category</th>
+        <td *matCellDef="let element" mat-cell>{{ element.path }}</td>
+      </ng-container>
+
+      <tr *matHeaderRowDef="displayedColumns" class="row-header" mat-header-row></tr>
+      <tr *matRowDef="let row; columns: displayedColumns" class="b" mat-row></tr>
+    </table>
+  </div>
+  <div class="element">
+    <mat-paginator [pageSizeOptions]="[50, dataSource.data.length]" showFirstLastButtons></mat-paginator>
+  </div>
 </div>

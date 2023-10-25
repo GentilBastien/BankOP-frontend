@@ -2,13 +2,16 @@
   <div class="element">
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
-        <mat-panel-title>
-          <span matBadge="{{ nbCurrentFilters }}" [matBadgeOverlap]="false" matBadgePosition="above after">
+        <mat-panel-title class="flex gap-6 items-center">
+          <span [matBadgeHidden]="nbCurrentFilters == 0" [matBadge]="nbCurrentFilters" matBadgePosition="above after">
             Filters
           </span>
+          <button *ngIf="nbCurrentFilters > 0" (click)="resetFilters($event)" color="primary" mat-raised-button>
+            Reset filters
+          </button>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <filter-operation></filter-operation>
+      <filter-operation #filterOperationComponent></filter-operation>
     </mat-expansion-panel>
   </div>
 
@@ -39,6 +42,6 @@
     </table>
   </div>
   <div class="element">
-    <mat-paginator [pageSizeOptions]="[50, dataSource.data.length]" showFirstLastButtons> </mat-paginator>
+    <mat-paginator [pageSizeOptions]="[50, dataSource.data.length]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

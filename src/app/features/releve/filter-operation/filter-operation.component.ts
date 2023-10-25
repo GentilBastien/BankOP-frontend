@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Moment } from 'moment';
 import { filter, map, Observable, tap } from 'rxjs';
-import { DEFAULT_HISTORIC_FILTER, ReleveFilter } from '../releve-filter';
+import { DEFAULT_RELEVE_FILTER, ReleveFilter } from '../releve-filter';
 import { ReleveUsecases } from '../releve-usecases';
 import { FormControl } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -28,7 +28,7 @@ export class FilterOperationComponent implements OnInit {
     this.filters$ = this.releveUsecases.filtersChanges();
     this.categories$ = this.releveUsecases.categoriesChanges();
     this.savedFilters$ = this.releveUsecases.savedFiltersChanges();
-    this.currentFilters = DEFAULT_HISTORIC_FILTER();
+    this.currentFilters = DEFAULT_RELEVE_FILTER();
     this.formControlSavedFilters = new FormControl<ReleveFilter | undefined>(undefined, { nonNullable: true });
   }
 
@@ -37,7 +37,7 @@ export class FilterOperationComponent implements OnInit {
     this.formControlSavedFilters.valueChanges
       .pipe(
         tap((selectedSavedFilters: ReleveFilter | undefined) =>
-          this.releveUsecases.setFilters(selectedSavedFilters ?? DEFAULT_HISTORIC_FILTER())
+          this.releveUsecases.setFilters(selectedSavedFilters ?? DEFAULT_RELEVE_FILTER())
         )
       )
       .subscribe();

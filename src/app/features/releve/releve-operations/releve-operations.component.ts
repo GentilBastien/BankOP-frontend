@@ -7,6 +7,7 @@ import { MatSort, Sort } from '@angular/material/sort';
 import { ReleveRowDto } from '../../../core/dtos/releve-operations/releve-row.dto';
 import { MatPaginator } from '@angular/material/paginator';
 import { ReleveFilter } from '../releve-filter';
+import { FilterOperationComponent } from '../filter-operation/filter-operation.component';
 
 @Component({
   selector: 'app-releve-operations',
@@ -14,11 +15,12 @@ import { ReleveFilter } from '../releve-filter';
   styleUrls: ['./releve-operations.component.scss'],
 })
 export class ReleveOperationsComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
   protected displayedColumns: string[] = ['date', 'name', 'price', 'path'];
   protected dataSource: MatTableDataSource<ReleveRowDto>;
   protected nbCurrentFilters: number = 0;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('filterOperationComponent') filterOpComponent!: FilterOperationComponent;
 
   constructor(private readonly historicUsecases: ReleveUsecases) {
     this.dataSource = new MatTableDataSource<ReleveRowDto>();
@@ -31,7 +33,10 @@ export class ReleveOperationsComponent implements OnInit, AfterViewInit {
       .subscribe();
     this.historicUsecases
       .filtersChanges()
-      .pipe(tap((filters: ReleveFilter) => (this.nbCurrentFilters = this.historicUsecases.countSetFilters(filters))))
+      .pipe(
+        tap(),
+        tap((filters: ReleveFilter) => (this.nbCurrentFilters = this.historicUsecases.countSetFilters(filters)))
+      )
       .subscribe();
   }
 
@@ -51,5 +56,10 @@ export class ReleveOperationsComponent implements OnInit, AfterViewInit {
 
   protected sortChanged(sortState: Sort): void {
     console.log(sortState.active + ' - ' + sortState.direction);
+  }
+
+  protected resetFilters($event: MouseEvent): void {
+    $event.stopPropagation();
+    this.filterOpComponent.resetFilters();
   }
 }
