@@ -1,10 +1,9 @@
 import { ReleveRowDto } from './releve-row.dto';
-import { Moment } from 'moment';
 
 export interface ReleveOperationDto {
   rows: ReleveRowDto[];
-  minDate: Moment;
-  maxDate: Moment;
+  minDate: string;
+  maxDate: string;
   minPrice: number;
   maxPrice: number;
   categories: string[];

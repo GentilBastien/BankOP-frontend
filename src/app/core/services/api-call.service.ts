@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 const baseEndpoint: string = 'http://localhost:8080/api/v1/';
 
 export abstract class ApiCallService<DTO> {
-  private readonly endpointApi: string;
+  protected readonly endpointApi: string;
 
   protected constructor(
     endpoint: string,
@@ -13,7 +13,7 @@ export abstract class ApiCallService<DTO> {
     this.endpointApi = baseEndpoint + endpoint;
   }
 
-  public create(item: DTO): Observable<DTO> {
+  public create<DTO>(item: DTO): Observable<DTO> {
     return this.httpService.post<DTO>(this.endpointApi, item);
   }
 

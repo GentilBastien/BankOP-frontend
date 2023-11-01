@@ -1,9 +1,9 @@
 mat-form-field {
-  width: 100%;
+  @apply w-full;
 }
 
 .mat-mdc-form-field-bottom-align {
-  display: none;
+  @apply hidden;
 }
 
 

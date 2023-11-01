@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ReleveStore } from './releve-store';
 import { Observable } from 'rxjs';
-import { ReleveRowDto } from '../../core/dtos/releve-operations/releve-row.dto';
 import { ReleveFilter } from './releve-filter';
-import _moment from 'moment';
-import _rollupMoment from 'moment';
-
-const moment = _rollupMoment || _moment;
+import { ReleveRow } from '../../core/entities/releve-operations/releve-row';
 
 @Injectable()
 export class ReleveUsecases {
@@ -16,7 +12,7 @@ export class ReleveUsecases {
     return this.releveStore.refreshReleveOperations();
   }
 
-  public operationsChanges(): Observable<ReleveRowDto[]> {
+  public operationsChanges(): Observable<ReleveRow[]> {
     return this.releveStore.operations$;
   }
 
@@ -41,23 +37,23 @@ export class ReleveUsecases {
     this.releveStore.setFilters(filter);
   }
 
-  public addSavedFilter(filter: ReleveFilter): void {
-    this.releveStore.addSavedFilter(filter);
+  public createSavedFilter(filter: ReleveFilter): void {
+    this.releveStore.createSavedFilter(filter);
   }
 
   public removeSavedFilter(filter: ReleveFilter): void {
     this.releveStore.removeSavedFilter(filter);
   }
 
-  public filterOperations(rows: ReleveRowDto[], filters: ReleveFilter): ReleveRowDto[] {
+  public filterOperations(rows: ReleveRow[], filters: ReleveFilter): ReleveRow[] {
     return rows
-      .filter(row => row.price >= (filters.minPrice ?? -Infinity))
-      .filter(row => row.price <= (filters.maxPrice ?? Infinity))
-      .filter(row => moment(row.date).isAfter(filters.minDate ?? moment('0000-01-01')))
-      .filter(row => moment(row.date).isBefore(filters.maxDate ?? moment('9999-12-31')))
-      .filter(row => row.name.toLowerCase().includes(filters.search.toLowerCase()))
+      .filter((row: ReleveRow) => row.price >= (filters.minPrice ?? -Infinity))
+      .filter((row: ReleveRow) => row.price <= (filters.maxPrice ?? Infinity))
+      .filter((row: ReleveRow) => (!filters.minDate ? true : row.date >= filters.minDate))
+      .filter((row: ReleveRow) => (!filters.maxDate ? true : row.date <= filters.maxDate))
+      .filter((row: ReleveRow) => row.name.toLowerCase().includes(filters.search.toLowerCase()))
       .filter(
-        row =>
+        (row: ReleveRow) =>
           filters.selectedCategories.length == 0 ||
           filters.selectedCategories.some(selectedCategory => selectedCategory === row.path)
       );
@@ -67,7 +63,7 @@ export class ReleveUsecases {
     let count: number = 0;
     for (const key in filter) {
       const val = filter[key as keyof ReleveFilter];
-      if (val && !Array.isArray(val) && key !== 'name') {
+      if ((val || (!val && val === 0)) && !Array.isArray(val) && key !== 'name') {
         count++;
       }
     }

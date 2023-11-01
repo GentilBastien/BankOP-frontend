@@ -1,9 +1,6 @@
-import { Moment } from 'moment';
+import { ImportRawOperationDto } from './import-raw-operation.dto';
 
-export interface ImportRowDto {
+export interface ImportRowDto extends ImportRawOperationDto {
   doublon: 'none' | 'file' | 'releve';
-  date: Moment;
-  name: string;
-  price: number;
   path: string;
 }

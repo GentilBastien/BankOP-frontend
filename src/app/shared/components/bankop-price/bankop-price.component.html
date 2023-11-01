@@ -1,5 +1,5 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ label }}</mat-label>
-  <input [formControl]="formControl" class="input-price" matInput placeholder="0" type="number" />
-  <span matTextSuffix>&nbsp;€</span>
+  <input [formControl]="inputFormControl" class="input-price" matInput placeholder="0" type="number" />
+  <mat-icon matSuffix [ngClass]="{ disable: inputFormControl.disabled }">euro_symbol</mat-icon>
 </mat-form-field>

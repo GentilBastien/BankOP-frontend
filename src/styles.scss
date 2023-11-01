@@ -21,3 +21,7 @@ body, html {
 .mdc-notched-outline__notch {
   border-right: none !important;
 }
+
+mat-icon.disable {
+  filter:opacity(0.5);
+}

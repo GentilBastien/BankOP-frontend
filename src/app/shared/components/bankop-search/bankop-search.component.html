@@ -1,4 +1,5 @@
 <mat-form-field appearance="outline">
   <mat-label>{{ label }}</mat-label>
-  <input [formControl]="formControl" matInput placeholder="(case insensitive, contains check)" />
+  <input [formControl]="inputFormControl" matInput placeholder="(case insensitive, contains check)" />
+  <mat-icon matSuffix [ngClass]="{ disable: inputFormControl.disabled }">search</mat-icon>
 </mat-form-field>

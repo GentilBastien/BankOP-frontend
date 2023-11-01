@@ -2,13 +2,10 @@
   <div class="element">
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
-        <mat-panel-title class="flex gap-6 items-center">
+        <mat-panel-title>
           <span [matBadgeHidden]="nbCurrentFilters == 0" [matBadge]="nbCurrentFilters" matBadgePosition="above after">
             Filters
           </span>
-          <button *ngIf="nbCurrentFilters > 0" (click)="resetFilters($event)" color="primary" mat-raised-button>
-            Reset filters
-          </button>
         </mat-panel-title>
       </mat-expansion-panel-header>
       <filter-operation #filterOperationComponent></filter-operation>
@@ -19,7 +16,7 @@
     <table (matSortChange)="sortChanged($event)" [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
       <ng-container matColumnDef="date">
         <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by date">Date</th>
-        <td *matCellDef="let element" mat-cell>{{ element.date }}</td>
+        <td *matCellDef="let element" mat-cell>{{ element.date.toLocaleDateString() }}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">

@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { returnVoid } from '../../shared/custom-operators/ReturnVoid';
 import { ReleveService } from '../../core/services/releve.service';
-import { ReleveRowDto } from '../../core/dtos/releve-operations/releve-row.dto';
 import { DEFAULT_RELEVE_FILTER, ReleveFilter } from './releve-filter';
-import { ReleveOperationDto } from '../../core/dtos/releve-operations/releve-operation.dto';
 import { ReleveFilterStorageService } from '../../core/services/local-storage/releve-filter-storage.service';
+import { ReleveRow } from '../../core/entities/releve-operations/releve-row';
+import { ReleveOperation } from '../../core/entities/releve-operations/releve-operation';
 
 @Injectable()
 export class ReleveStore {
-  private operationsSubject: BehaviorSubject<ReleveRowDto[]> = new BehaviorSubject<ReleveRowDto[]>([]);
-  public operations$: Observable<ReleveRowDto[]> = this.operationsSubject.asObservable();
+  private operationsSubject: BehaviorSubject<ReleveRow[]> = new BehaviorSubject<ReleveRow[]>([]);
+  public operations$: Observable<ReleveRow[]> = this.operationsSubject.asObservable();
 
   private categoriesSubject: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public categories$: Observable<string[]> = this.categoriesSubject.asObservable();
@@ -34,8 +34,8 @@ export class ReleveStore {
 
   public refreshReleveOperations(): Observable<void> {
     return this.releveService.fetch().pipe(
-      tap((releveOp: ReleveOperationDto) => this.operationsSubject.next(releveOp.rows)),
-      tap((releveOp: ReleveOperationDto) => this.categoriesSubject.next(releveOp.categories)),
+      tap((releveOp: ReleveOperation) => this.operationsSubject.next(releveOp.rows)),
+      tap((releveOp: ReleveOperation) => this.categoriesSubject.next(releveOp.categories)),
       returnVoid()
     );
   }
@@ -45,15 +45,15 @@ export class ReleveStore {
     this.releveFilterStorageService.setItem(filter);
   }
 
-  public addSavedFilter(newSavedFilter: ReleveFilter): void {
-    const savedFilters: ReleveFilter[] = this.savedFiltersSubject.getValue();
-    savedFilters.push(newSavedFilter);
-    this.savedFiltersSubject.next(savedFilters);
-  }
-
   public removeSavedFilter(oldSavedFilter: ReleveFilter): void {
     const savedFilters: ReleveFilter[] = this.savedFiltersSubject.getValue();
     savedFilters.splice(savedFilters.indexOf(oldSavedFilter), 1);
+    this.savedFiltersSubject.next(savedFilters);
+  }
+
+  public createSavedFilter(filter: ReleveFilter): void {
+    const savedFilters: ReleveFilter[] = this.savedFiltersSubject.getValue();
+    savedFilters.push(filter);
     this.savedFiltersSubject.next(savedFilters);
   }
 }

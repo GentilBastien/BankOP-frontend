@@ -1,19 +1,20 @@
-<div class="container">
-  <div class="element">
-    <button mat-raised-button (click)="openFileView()">Open file (.csv)</button>
-    <input type="file" id="fileInput" #fileInput (change)="filesChanged()" [multiple]="false" />
+<div>
+  <div class="flex flex-row items-center">
+    <button mat-raised-button [disabled]="!!selectedFile" (click)="openFileView()">Open file (.csv)</button>
+    <button mat-icon-button *ngIf="selectedFile" (click)="resetFile()"><mat-icon>close</mat-icon></button>
+    <input type="file" class="hidden" #fileInput (change)="changeFile()" [multiple]="false" />
   </div>
 
-  <div class="element shrinkable">
+  <div>
     <table [dataSource]="dataSource" class="mat-elevation-z8" mat-table matSort>
       <ng-container matColumnDef="doublon">
         <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by doublon">Doublon</th>
-        <td *matCellDef="let element" mat-cell>{{ true }}</td>
+        <td *matCellDef="let element" mat-cell>{{ element.doublon }}</td>
       </ng-container>
 
       <ng-container matColumnDef="date">
         <th *matHeaderCellDef mat-header-cell mat-sort-header sortActionDescription="Sort by date">Date</th>
-        <td *matCellDef="let element" mat-cell>{{ element.date }}</td>
+        <td *matCellDef="let element" mat-cell>{{ element.date.toLocaleDateString() }}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
