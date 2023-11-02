@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ImportService } from '../../core/services/import.service';
 import { ImportOperation } from '../../core/entities/import-operations/import-operation';
-import { ImportRawOperationDto } from '../../core/dtos/import-operations/import-raw-operation.dto';
 import { returnVoid } from '../../shared/custom-operators/ReturnVoid';
+import { ImportOperationDto } from '../../core/dtos/import-operations/import-operation.dto';
 
 @Injectable()
 export class ImportStore {
@@ -15,15 +15,14 @@ export class ImportStore {
 
   constructor(private readonly importService: ImportService) {}
 
-  public fetchOperationFromRaw(rawOperations: ImportRawOperationDto[]): Observable<void> {
-    return this.importService.fetch(rawOperations).pipe(
-      tap(a => console.log(a)),
+  public fetchOperationFromOpDto(importOperationDtos: ImportOperationDto[]): Observable<void> {
+    return this.importService.fetch(importOperationDtos).pipe(
       tap((importRows: ImportOperation[]) => this.operationsSubject.next(importRows)),
       returnVoid()
     );
   }
 
-  public clearOperationsFromRaw(): void {
+  public clearOpDto(): void {
     this.operationsSubject.next([]);
   }
 

@@ -4,8 +4,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { ImportUsecases } from '../import-usecases';
 import { from, Observable, switchMap, tap } from 'rxjs';
-import { ImportRawOperationDto } from '../../../core/dtos/import-operations/import-raw-operation.dto';
 import { ImportOperation } from '../../../core/entities/import-operations/import-operation';
+import { ImportOperationDto } from '../../../core/dtos/import-operations/import-operation.dto';
 
 @Component({
   selector: 'app-import',
@@ -27,8 +27,8 @@ export class ImportComponent implements OnInit, AfterViewInit {
     this.operations$ = this.importUsecases.selectedFileChanges().pipe(
       tap((file: File | null) => (this.selectedFile = file)),
       switchMap((file: File | null) => from(this.importUsecases.parseCSVFile(file))),
-      switchMap((importRawOpDtos: ImportRawOperationDto[]) =>
-        this.importUsecases.fetchOperationFromRaw(importRawOpDtos)
+      switchMap((importOperationDtos: ImportOperationDto[]) =>
+        this.importUsecases.fetchOperationFromOpDto(importOperationDtos)
       ),
       switchMap(() => this.importUsecases.operationsChanges()),
       tap((rows: ImportOperation[]) => (this.dataSource.data = rows))

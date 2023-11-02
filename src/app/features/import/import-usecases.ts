@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ImportStore } from './import-store';
 import { EMPTY, Observable } from 'rxjs';
-import { ImportRawOperationDto } from '../../core/dtos/import-operations/import-raw-operation.dto';
 import { ImportOperation } from '../../core/entities/import-operations/import-operation';
+import { ImportOperationDto } from '../../core/dtos/import-operations/import-operation.dto';
 
 @Injectable()
 export class ImportUsecases {
@@ -24,35 +24,31 @@ export class ImportUsecases {
     this.importStore.setSelectedFile(file);
   }
 
-  public async parseCSVFile(file: File | null): Promise<ImportRawOperationDto[]> {
+  public async parseCSVFile(file: File | null): Promise<ImportOperationDto[]> {
     if (!file) return [];
-    const rawOperations: ImportRawOperationDto[] = [];
+    const importOperationDtos: ImportOperationDto[] = [];
     const raw: string = await file.text();
     const lines: string[] = raw.split('\n');
     lines.shift();
     lines.forEach(line => {
-      const parsedLine: ImportRawOperationDto | null = this.parseCSVLine(line);
+      const parsedLine: ImportOperationDto | null = this.parseCSVLine(line);
       if (parsedLine) {
-        rawOperations.push(parsedLine);
+        importOperationDtos.push(parsedLine);
       }
     });
-    return rawOperations;
+    return importOperationDtos;
   }
 
-  public fetchOperationFromRaw(importRawOperationDtos: ImportRawOperationDto[]): Observable<void> {
-    if (importRawOperationDtos.length > 0) {
-      return this.importStore.fetchOperationFromRaw(importRawOperationDtos);
+  public fetchOperationFromOpDto(importOperationDtos: ImportOperationDto[]): Observable<void> {
+    if (importOperationDtos.length > 0) {
+      return this.importStore.fetchOperationFromOpDto(importOperationDtos);
     } else {
-      this.importStore.clearOperationsFromRaw();
+      this.importStore.clearOpDto();
       return EMPTY;
     }
   }
 
-  public clearOperationsFromRaw(): void {
-    this.importStore.clearOperationsFromRaw();
-  }
-
-  private parseCSVLine(line: string): ImportRawOperationDto | null {
+  private parseCSVLine(line: string): ImportOperationDto | null {
     if (line) {
       const regex: RegExp = /[^;]+/g;
       const fields: string[] = [];
@@ -62,7 +58,7 @@ export class ImportUsecases {
       }
       return {
         date: fields[0],
-        name: fields[2],
+        name: fields[2].slice(1, -1),
         price: parseFloat(fields[6].replace(',', '.')),
       };
     }

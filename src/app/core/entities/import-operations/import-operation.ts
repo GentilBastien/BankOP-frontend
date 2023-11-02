@@ -3,5 +3,6 @@ export interface ImportOperation {
   date: Date;
   name: string;
   price: number;
-  path: string;
+  categoryId: number;
+  categoryName: string;
 }
