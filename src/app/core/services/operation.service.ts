@@ -7,10 +7,7 @@ import { CrudBaseService } from './crud-base.service';
   providedIn: 'root',
 })
 export class OperationService extends CrudBaseService {
-  constructor(
-    httpService: HttpClient,
-    private readonly operationMapper: OperationMapper
-  ) {
+  constructor(httpService: HttpClient, operationMapper: OperationMapper) {
     super('operations', operationMapper, httpService);
   }
 }

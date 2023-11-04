@@ -22,6 +22,11 @@ export class ImportStore {
     );
   }
 
+  public pushOperations(): void {
+    const importOperations: ImportOperation[] = this.operationsSubject.getValue();
+    importOperations.forEach((importOperation: ImportOperation) => this.importService.pushOperation(importOperation));
+  }
+
   public clearOpDto(): void {
     this.operationsSubject.next([]);
   }

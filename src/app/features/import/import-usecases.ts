@@ -48,6 +48,10 @@ export class ImportUsecases {
     }
   }
 
+  public pushOperations(): void {
+    this.importStore.pushOperations();
+  }
+
   private parseCSVLine(line: string): ImportOperationDto | null {
     if (line) {
       const regex: RegExp = /[^;]+/g;

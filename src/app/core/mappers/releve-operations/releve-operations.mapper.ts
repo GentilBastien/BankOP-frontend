@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import { ReleveRowMapper } from './releve-row-mapper';
 import { ReleveRowDto } from '../../dtos/releve-operations/releve-row.dto';
 import { ReleveRow } from '../../entities/releve-operations/releve-row';
+import { dateToString } from '../../../shared/utils/utils';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,7 @@ export class ReleveOperationsMapper extends AbstractMapper<ReleveOperationDto, R
 
   public fromDto(dto: ReleveOperationDto): ReleveOperation {
     return {
-      rows: dto.rows.map((releveRowDto: ReleveRowDto) => this.releveRowMapper.fromDto(releveRowDto)),
+      rows: dto.rows ? dto.rows.map((releveRowDto: ReleveRowDto) => this.releveRowMapper.fromDto(releveRowDto)) : [],
       minDate: new Date(dto.minDate),
       maxDate: new Date(dto.maxDate),
       minPrice: dto.minPrice,
@@ -27,9 +28,9 @@ export class ReleveOperationsMapper extends AbstractMapper<ReleveOperationDto, R
 
   public toDto(model: ReleveOperation): ReleveOperationDto {
     return {
-      rows: model.rows.map((releveRow: ReleveRow) => this.releveRowMapper.toDto(releveRow)),
-      minDate: model.minDate.toLocaleDateString(),
-      maxDate: model.maxDate.toLocaleDateString(),
+      rows: model.rows ? model.rows.map((releveRow: ReleveRow) => this.releveRowMapper.toDto(releveRow)) : [],
+      minDate: dateToString(model.minDate),
+      maxDate: dateToString(model.maxDate),
       minPrice: model.minPrice,
       maxPrice: model.maxPrice,
       categories: model.categories,

@@ -69,6 +69,11 @@ export class ImportComponent implements OnInit, AfterViewInit {
     }
   }
 
+  protected pushOperations(): void {
+    this.importUsecases.pushOperations();
+    this.resetFile();
+  }
+
   protected resetFile(): void {
     this.fileInput.nativeElement.value = '';
     this.importUsecases.selectedFileChanged(null);

@@ -17,7 +17,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
-import { RangePipe } from './custom-pipes/RangePipe';
+import { RangePipe } from './custom-pipes/range-pipe';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -27,6 +27,7 @@ import { BankopSearchComponent } from './components/bankop-search/bankop-search.
 import { BankopChipsComponent } from './components/bankop-chips/bankop-chips.component';
 import { BankopPriceComponent } from './components/bankop-price/bankop-price.component';
 import { FilterFormComponent } from './components/filter-form/filter-form.component';
+import { DatePipe } from './custom-pipes/date-pipe';
 
 const materialModules = [
   MatIconModule,
@@ -62,9 +63,11 @@ const components = [
   FilterFormComponent,
 ];
 
+const pipes = [RangePipe, DatePipe];
+
 @NgModule({
-  declarations: [...components, RangePipe],
+  declarations: [...components, ...pipes],
   imports: [CommonModule, ...materialModules],
-  exports: [CommonModule, ...materialModules, ...components, RangePipe],
+  exports: [CommonModule, ...materialModules, ...components, ...pipes],
 })
 export class SharedModule {}

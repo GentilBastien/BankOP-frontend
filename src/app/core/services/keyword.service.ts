@@ -7,10 +7,7 @@ import { CrudBaseService } from './crud-base.service';
   providedIn: 'root',
 })
 export class KeywordService extends CrudBaseService {
-  constructor(
-    httpService: HttpClient,
-    private readonly keywordMapper: KeywordMapper
-  ) {
+  constructor(httpService: HttpClient, keywordMapper: KeywordMapper) {
     super('keywords', keywordMapper, httpService);
   }
 }
