@@ -3,12 +3,16 @@
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          <span [matBadgeHidden]="nbCurrentFilters == 0" [matBadge]="nbCurrentFilters" matBadgePosition="above after">
+          <span
+            [matBadgeHidden]="(currentFilters$ | async) === 0"
+            [matBadge]="currentFilters$ | async"
+            matBadgePosition="above after"
+          >
             Filters
           </span>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <filter-operation #filterOperationComponent></filter-operation>
+      <bankop-filter-form [categories$]="categories$"></bankop-filter-form>
     </mat-expansion-panel>
   </div>
 

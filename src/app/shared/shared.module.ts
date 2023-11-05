@@ -26,7 +26,6 @@ import { BankopDateComponent } from './components/bankop-date/bankop-date.compon
 import { BankopSearchComponent } from './components/bankop-search/bankop-search.component';
 import { BankopChipsComponent } from './components/bankop-chips/bankop-chips.component';
 import { BankopPriceComponent } from './components/bankop-price/bankop-price.component';
-import { FilterFormComponent } from './components/filter-form/filter-form.component';
 import { DatePipe } from './custom-pipes/date-pipe';
 
 const materialModules = [
@@ -60,7 +59,6 @@ const components = [
   BankopSearchComponent,
   BankopChipsComponent,
   BankopPriceComponent,
-  FilterFormComponent,
 ];
 
 const pipes = [RangePipe, DatePipe];

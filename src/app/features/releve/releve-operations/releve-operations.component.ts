@@ -1,12 +1,12 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ReleveUsecases } from '../releve-usecases';
 import { MatTableDataSource } from '@angular/material/table';
-import { combineLatestWith, map, Observable, switchMap, tap } from 'rxjs';
+import { Observable, switchMap, tap } from 'rxjs';
 import { returnVoid } from '../../../shared/custom-operators/ReturnVoid';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { ReleveFilter } from '../releve-filter';
 import { ReleveRow } from '../../../core/entities/releve-operations/releve-row';
+import { ConfigurationFilterUsecases } from '../../configuration-filter/configuration-filter-usecases';
 
 @Component({
   selector: 'app-releve-operations',
@@ -16,25 +16,24 @@ import { ReleveRow } from '../../../core/entities/releve-operations/releve-row';
 export class ReleveOperationsComponent implements OnInit, AfterViewInit {
   protected displayedColumns: string[] = ['date', 'name', 'price', 'path'];
   protected dataSource: MatTableDataSource<ReleveRow>;
-  protected nbCurrentFilters: number = 0;
+  protected categories$: Observable<string[]>;
+  protected currentFilters$: Observable<number>;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private readonly releveUsecases: ReleveUsecases) {
+  constructor(
+    private readonly releveUsecases: ReleveUsecases,
+    private readonly configurationFilterUsecases: ConfigurationFilterUsecases
+  ) {
     this.dataSource = new MatTableDataSource<ReleveRow>();
+    this.categories$ = this.releveUsecases.categoriesChanges();
+    this.currentFilters$ = this.configurationFilterUsecases.countSetFilters();
   }
 
   public ngOnInit(): void {
     this.releveUsecases
       .refreshReleveOperations()
       .pipe(switchMap(() => this.operationsChanges()))
-      .subscribe();
-    this.releveUsecases
-      .filtersChanges()
-      .pipe(
-        tap(),
-        tap((filters: ReleveFilter) => (this.nbCurrentFilters = this.releveUsecases.countSetFilters(filters)))
-      )
       .subscribe();
   }
 
@@ -45,9 +44,13 @@ export class ReleveOperationsComponent implements OnInit, AfterViewInit {
 
   private operationsChanges(): Observable<void> {
     return this.releveUsecases.operationsChanges().pipe(
-      combineLatestWith(this.releveUsecases.filtersChanges()),
-      map(([rows, filters]) => this.releveUsecases.filterOperations(rows, filters)),
-      tap(rows => (this.dataSource.data = rows)),
+      switchMap((listToFilter: ReleveRow[]) =>
+        this.configurationFilterUsecases.filterWithPredicate<ReleveRow>(
+          listToFilter,
+          this.releveUsecases.filterPredicate
+        )
+      ),
+      tap((rows: ReleveRow[]) => (this.dataSource.data = rows)),
       returnVoid()
     );
   }

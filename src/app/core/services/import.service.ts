@@ -23,7 +23,7 @@ export class ImportService extends ApiCallService<ImportOperationDto> {
   }
 
   public fetch(importOperationDtos: ImportOperationDto[]): Observable<ImportOperation[]> {
-    return this.create(importOperationDtos).pipe(
+    return this.create<ImportOperationDto[]>(importOperationDtos).pipe(
       map((responseBody: ImportOperationDto[]) =>
         responseBody.map((importOperationDto: ImportOperationDto) =>
           this.importOperationsMapper.fromDto(importOperationDto)

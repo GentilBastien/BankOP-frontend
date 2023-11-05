@@ -3,14 +3,14 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-dialog-filter-name',
-  templateUrl: './dialog-filter-name.component.html',
-  styleUrls: ['./dialog-filter-name.component.scss'],
+  selector: 'app-filter-dialog',
+  templateUrl: './filter-dialog.component.html',
+  styleUrls: ['./filter-dialog.component.scss'],
 })
-export class DialogFilterNameComponent {
+export class FilterDialogComponent {
   protected formControl: FormControl<string>;
 
-  constructor(public dialogRef: MatDialogRef<DialogFilterNameComponent>) {
+  constructor(private dialogRef: MatDialogRef<FilterDialogComponent>) {
     this.formControl = new FormControl('', {
       nonNullable: true,
       updateOn: 'change',
