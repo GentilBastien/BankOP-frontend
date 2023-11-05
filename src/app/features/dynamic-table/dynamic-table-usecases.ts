@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DynamicTableHeader } from './DynamicTableHeader';
-import { DynamicTableStore } from './DynamicTableStore';
+import { DynamicTableHeader } from './dynamic-table-header';
+import { DynamicTableStore } from './dynamic-table-store';
 import { Observable } from 'rxjs';
 import { TreePriceTableDto } from '../../core/dtos/dynamic-table/tree-price-table.dto';
 

@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { DynamicTableService } from '../../core/services/dynamic-table.service';
 import { TreePriceTableDto } from '../../core/dtos/dynamic-table/tree-price-table.dto';
 import { returnVoid } from '../../shared/custom-operators/ReturnVoid';
-import { DynamicTableHeader } from './DynamicTableHeader';
+import { DynamicTableHeader } from './dynamic-table-header';
 
 @Injectable()
 export class DynamicTableStore {
