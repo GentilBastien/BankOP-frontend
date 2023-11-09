@@ -16,12 +16,6 @@ export class AlertsStore {
     this.alertsSubject.next(newAlerts);
   }
 
-  public deleteAlert(alert: Alert): void {
-    // const newAlerts: Alert[] = this.alertsSubject.getValue();
-    // newAlerts.splice(alert.sequenceOrder, 1);
-    // this.alertsSubject.next(newAlerts);
-  }
-
   public removeAlertAfterDelay() {
     const alerts: Alert[] = this.alertsSubject.getValue();
     const newAlerts: Alert[] = alerts.slice(0, -1);
