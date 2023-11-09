@@ -27,6 +27,7 @@ import { BankopSearchComponent } from './components/bankop-search/bankop-search.
 import { BankopChipsComponent } from './components/bankop-chips/bankop-chips.component';
 import { BankopPriceComponent } from './components/bankop-price/bankop-price.component';
 import { DatePipe } from './custom-pipes/date-pipe';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 const materialModules = [
   MatIconModule,
@@ -51,6 +52,7 @@ const materialModules = [
   MatDatepickerModule,
   FormsModule,
   MatDialogModule,
+  MatProgressBarModule,
 ];
 
 const components = [
