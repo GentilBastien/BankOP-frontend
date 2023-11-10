@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(private readonly alertsUsecases: AlertsUsecases) {}
 
   displayAlert() {
-    this.alertsUsecases.displayAlert(this.generateRandomString(12));
+    this.alertsUsecases.displayAlertWarn(this.generateRandomString(12));
   }
 
   generateRandomString(length: number): string {

@@ -1,4 +1,5 @@
-<div class="alert-container">
-  <span class="alert-text">{{ alert.message }}</span>
+<div class="alert-container" [style.border-color]="alert.color" [style.background-color]="alert.bg_color">
+  <mat-icon class="alert-icon" [style.color]="alert.color">{{ alert.icon }}</mat-icon>
+  <span class="alert-text" [style.color]="alert.color">{{ alert.message }}</span>
   <span class="grow"></span>
 </div>

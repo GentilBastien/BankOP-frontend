@@ -1,18 +1,11 @@
 .alert-container {
-  @apply flex flex-row relative overflow-hidden items-center;
+  @apply flex flex-row relative overflow-hidden items-center ;
   @apply w-96 h-fit rounded-md;
   @apply my-2 mr-5 mb-0;
-
-  background: rgba(86, 185, 44, 0.15);
-  border-left: 10px solid #56b92c;
-  border-top: 1px solid #56b92c;
-  border-right: 1px solid #56b92c;
-  border-bottom: 1px solid #56b92c;
+  @apply border-l-8 border-b border-t border-r;
 }
 
 .alert-text {
-  @apply w-fit py-2.5 px-3;
+  @apply w-fit py-2.5 pr-3 pl-1;
   @apply font-medium;
-
-  color: #468c28;
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Alert } from '../../core/entities/alert/alert';
+import { Alert, AlertType, BUILD_ALERT } from '../../core/entities/alert/alert';
 import { AlertsStore } from './alerts-store';
 import { Observable } from 'rxjs';
 
@@ -13,11 +13,29 @@ export class AlertsUsecases {
     return this.alertsStore.alerts$;
   }
 
-  public displayAlert(message: string): void {
-    const alert: Alert = {
-      message,
-    };
+  public displayAlertSuccess(message: string): void {
+    const alert: Alert = BUILD_ALERT(message, AlertType.SUCCESS);
+    this.pushAlert(alert);
+  }
+
+  public displayAlertInfo(message: string): void {
+    const alert: Alert = BUILD_ALERT(message, AlertType.INFO);
+    console.log(alert);
+    this.pushAlert(alert);
+  }
+
+  public displayAlertWarn(message: string): void {
+    const alert: Alert = BUILD_ALERT(message, AlertType.WARN);
+    this.pushAlert(alert);
+  }
+
+  public displayAlertError(message: string): void {
+    const alert: Alert = BUILD_ALERT(message, AlertType.ERROR);
+    this.pushAlert(alert);
+  }
+
+  private pushAlert(alert: Alert): void {
     this.alertsStore.pushAlert(alert);
-    setTimeout(() => this.alertsStore.removeAlertAfterDelay(), 4000);
+    setTimeout(() => this.alertsStore.removeAlertAfterDelay(), 20000);
   }
 }

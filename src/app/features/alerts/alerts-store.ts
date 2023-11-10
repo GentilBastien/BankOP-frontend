@@ -10,13 +10,12 @@ export class AlertsStore {
   public alerts$: Observable<Alert[]> = this.alertsSubject.asObservable();
 
   public pushAlert(alert: Alert): void {
-    const alerts: Alert[] = this.alertsSubject.getValue();
     const newAlerts: Alert[] = [alert];
-    newAlerts.push(...alerts);
+    newAlerts.push(...this.alertsSubject.getValue());
     this.alertsSubject.next(newAlerts);
   }
 
-  public removeAlertAfterDelay() {
+  public removeAlertAfterDelay(): void {
     const alerts: Alert[] = this.alertsSubject.getValue();
     const newAlerts: Alert[] = alerts.slice(0, -1);
     this.alertsSubject.next(newAlerts);
