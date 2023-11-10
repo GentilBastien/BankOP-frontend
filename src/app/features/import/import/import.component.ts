@@ -6,6 +6,7 @@ import { ImportUsecases } from '../import-usecases';
 import { from, Observable, switchMap, tap } from 'rxjs';
 import { ImportOperation } from '../../../core/entities/import-operations/import-operation';
 import { ImportOperationDto } from '../../../core/dtos/import-operations/import-operation.dto';
+import { AlertsUsecases } from '../../alerts/alerts-usecases';
 
 @Component({
   selector: 'app-import',
@@ -21,7 +22,10 @@ export class ImportComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
 
-  constructor(private readonly importUsecases: ImportUsecases) {
+  constructor(
+    private readonly importUsecases: ImportUsecases,
+    private readonly alertsUsecases: AlertsUsecases
+  ) {
     this.dataSource = new MatTableDataSource<ImportOperation>();
     this.selectedFile = null;
     this.operations$ = this.importUsecases.selectedFileChanges().pipe(
@@ -52,8 +56,10 @@ export class ImportComponent implements OnInit, AfterViewInit {
     const fileList: FileList | null = this.fileInput.nativeElement.files;
     const file: File | null = fileList ? fileList.item(0) : null;
     if (this.importUsecases.isValidFile(file)) {
+      this.alertsUsecases.displayAlertSuccess('File ' + file?.name + ' opened successfully.');
       this.importUsecases.selectedFileChanged(file);
     } else {
+      this.alertsUsecases.displayAlertError('Could not open file ' + file?.name + '.');
       this.fileInput.nativeElement.value = '';
       if (file) {
         console.log(
@@ -71,6 +77,7 @@ export class ImportComponent implements OnInit, AfterViewInit {
 
   protected pushOperations(): void {
     this.importUsecases.pushOperations();
+    this.alertsUsecases.displayAlertInfo('Operations pushed to database.');
     this.resetFile();
   }
 

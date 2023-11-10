@@ -36,6 +36,6 @@ export class AlertsUsecases {
 
   private pushAlert(alert: Alert): void {
     this.alertsStore.pushAlert(alert);
-    setTimeout(() => this.alertsStore.removeAlertAfterDelay(), 20000);
+    setTimeout(() => this.alertsStore.removeAlertAfterDelay(), 4000);
   }
 }

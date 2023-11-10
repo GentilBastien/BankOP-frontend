@@ -11,6 +11,7 @@ import {
   equals,
   isDefaultConfigurationFilter,
 } from '../../../../core/entities/configuration-filter/configuration-filter';
+import { AlertsUsecases } from '../../../alerts/alerts-usecases';
 
 @Component({
   selector: 'bankop-filter-form',
@@ -27,6 +28,7 @@ export class FilterFormComponent implements OnInit {
 
   constructor(
     private readonly configurationFilterUsecases: ConfigurationFilterUsecases,
+    private readonly alertsUsecases: AlertsUsecases,
     private dialog: MatDialog
   ) {
     this.categories$ = of([]);
@@ -134,6 +136,7 @@ export class FilterFormComponent implements OnInit {
     } else {
       this.formGroup.disable();
       this.configurationFilterUsecases.setFilters(selectedSavedFilters);
+      this.alertsUsecases.displayAlertSuccess('Filter ' + selectedSavedFilters?.name + ' applied successfully.');
     }
   }
 }
