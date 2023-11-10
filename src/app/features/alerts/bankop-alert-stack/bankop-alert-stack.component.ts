@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Alert } from '../../../core/entities/alert/alert';
+import { Alert } from '../alert';
 import { Observable } from 'rxjs';
 import { AlertsUsecases } from '../alerts-usecases';
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Alert, AlertType, BUILD_ALERT } from '../../core/entities/alert/alert';
+import { Alert, AlertType, BUILD_ALERT } from './alert';
 import { AlertsStore } from './alerts-store';
 import { Observable } from 'rxjs';
 

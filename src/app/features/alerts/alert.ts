@@ -20,11 +20,11 @@ export const BUILD_ALERT = (message: string, type: AlertType): Alert => {
 function findColors(type: AlertType): string[] {
   switch (type) {
     case AlertType.SUCCESS:
-      return ['#56b92c', '#56B92C26'];
+      return ['#56b92c', '#e2ffd7'];
     case AlertType.INFO:
-      return ['#239fa4', '#239fa426'];
+      return ['#239fa4', '#dcf8ff'];
     case AlertType.WARN:
-      return ['#ff9900', '#ff990026'];
+      return ['#ff9900', '#ffe7cf'];
     case AlertType.ERROR:
       return ['#dc3131', '#dc313126'];
   }
