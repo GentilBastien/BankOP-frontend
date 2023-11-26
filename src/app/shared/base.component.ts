@@ -33,7 +33,7 @@ export abstract class BaseComponent {
   protected submitCreate(): void {
     if (this.createFormGroup.valid) {
       const values: string[] = this.retrieveInputsFromCreateFormGroup();
-      this.baseService.createEntity(values);
+      this.baseService.createEntities(values);
     }
   }
 

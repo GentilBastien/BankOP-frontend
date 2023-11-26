@@ -8,10 +8,7 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './tables.component.html',
 })
 export class TablesComponent extends BaseComponent {
-  constructor(
-    private readonly tableService: TableService,
-    fb: FormBuilder
-  ) {
+  constructor(tableService: TableService, fb: FormBuilder) {
     super(tableService, fb);
   }
 }

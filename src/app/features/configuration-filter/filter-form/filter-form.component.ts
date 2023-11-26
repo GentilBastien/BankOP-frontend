@@ -4,14 +4,14 @@ import { filter, map, Observable, of, switchMap, tap } from 'rxjs';
 import { FilterFormModel } from './filter-form.model';
 import { MatDialog } from '@angular/material/dialog';
 import { FilterDialogComponent } from '../filter-dialog/filter-dialog.component';
-import { ConfigurationFilterUsecases } from '../../configuration-filter-usecases';
+import { ConfigurationFilterUsecases } from '../configuration-filter-usecases';
 import {
   ConfigurationFilter,
   DEFAULT_CONFIGURATION_FILTER,
   equals,
   isDefaultConfigurationFilter,
-} from '../../../../core/entities/configuration-filter/configuration-filter';
-import { AlertsUsecases } from '../../../alerts/alerts-usecases';
+} from '../../../core/entities/configuration-filter/configuration-filter';
+import { AlertsUsecases } from '../../alerts/alerts-usecases';
 
 @Component({
   selector: 'bankop-filter-form',

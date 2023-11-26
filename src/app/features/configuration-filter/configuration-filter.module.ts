@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { ConfigurationFilterStore } from './configuration-filter-store';
 import { ConfigurationFilterUsecases } from './configuration-filter-usecases';
 import { SharedModule } from '../../shared/shared.module';
-import { FilterFormComponent } from './components/filter-form/filter-form.component';
-import { FilterDialogComponent } from './components/filter-dialog/filter-dialog.component';
+import { FilterFormComponent } from './filter-form/filter-form.component';
+import { FilterDialogComponent } from './filter-dialog/filter-dialog.component';
 
 @NgModule({
   declarations: [FilterFormComponent, FilterDialogComponent],

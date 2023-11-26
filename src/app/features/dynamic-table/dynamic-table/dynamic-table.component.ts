@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DynamicTableUsecases } from '../../dynamic-table-usecases';
-import { DynamicTableHeader } from '../../dynamic-table-header';
+import { DynamicTableUsecases } from '../dynamic-table-usecases';
+import { DynamicTableHeader } from '../dynamic-table-header';
 import { Observable, switchMap, tap } from 'rxjs';
-import { returnVoid } from '../../../../shared/custom-operators/ReturnVoid';
-import { PriceTableDto } from '../../../../core/dtos/dynamic-table/price-table.dto';
+import { returnVoid } from '../../../shared/custom-operators/ReturnVoid';
+import { PriceTableDto } from '../../../core/dtos/dynamic-table/price-table.dto';
 
 @Component({
   selector: 'app-dynamic-table',

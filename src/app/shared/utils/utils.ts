@@ -5,3 +5,13 @@ export function dateToString(date: Date | undefined): string {
     return 'undefined date';
   }
 }
+
+export function valueAsArray<T>(value?: T | T[]): T[] {
+  if (!value) {
+    return [];
+  } else if (Array.isArray(value)) {
+    return value;
+  } else {
+    return [value];
+  }
+}

@@ -18,8 +18,12 @@ export abstract class CrudBaseService extends ApiCallService<CrudBaseDto> {
     return this.getAll().pipe(map(baseDtoArray => baseDtoArray.map(baseDto => this.baseMapper.fromDto(baseDto))));
   }
 
-  public createEntity(names: string[]): void {
-    const dto: CrudBaseDto = this.baseMapper.fromStringToDto(names);
+  public createEntities(properties: string[]): void {
+    const dto: CrudBaseDto = this.baseMapper.fromStringToDto(properties);
+    this.create(dto).subscribe();
+  }
+
+  public createEntity(dto: CrudBaseDto): void {
     this.create(dto).subscribe();
   }
 

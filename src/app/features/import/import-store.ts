@@ -4,6 +4,7 @@ import { ImportService } from '../../core/services/import.service';
 import { ImportOperation } from '../../core/entities/import-operations/import-operation';
 import { returnVoid } from '../../shared/custom-operators/ReturnVoid';
 import { ImportOperationDto } from '../../core/dtos/import-operations/import-operation.dto';
+import { OperationService } from '../../core/services/operation.service';
 
 @Injectable()
 export class ImportStore {
@@ -13,7 +14,10 @@ export class ImportStore {
   private operationsSubject: BehaviorSubject<ImportOperation[]> = new BehaviorSubject<ImportOperation[]>([]);
   public operations$: Observable<ImportOperation[]> = this.operationsSubject.asObservable();
 
-  constructor(private readonly importService: ImportService) {}
+  constructor(
+    private readonly importService: ImportService,
+    private readonly operationService: OperationService
+  ) {}
 
   public fetchOperationFromOpDto(importOperationDtos: ImportOperationDto[]): Observable<void> {
     return this.importService.fetch(importOperationDtos).pipe(
@@ -24,7 +28,9 @@ export class ImportStore {
 
   public pushOperations(): void {
     const importOperations: ImportOperation[] = this.operationsSubject.getValue();
-    importOperations.forEach((importOperation: ImportOperation) => this.importService.pushOperation(importOperation));
+    importOperations.forEach((importOperation: ImportOperation) =>
+      this.operationService.pushOperation(importOperation)
+    );
   }
 
   public clearOpDto(): void {

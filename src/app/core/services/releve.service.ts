@@ -4,7 +4,7 @@ import { map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ReleveOperationDto } from '../dtos/releve-operations/releve-operation.dto';
 import { ReleveOperation } from '../entities/releve-operations/releve-operation';
-import { ReleveOperationsMapper } from '../mappers/releve-operations/releve-operations.mapper';
+import { ReleveOperationsMapper } from '../mappers/releve-operations/releve-operations-mapper';
 
 @Injectable({
   providedIn: 'root',

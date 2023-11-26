@@ -8,10 +8,7 @@ import { BaseComponent } from '../../../shared/base.component';
   templateUrl: './operations.component.html',
 })
 export class OperationsComponent extends BaseComponent {
-  constructor(
-    private readonly operationService: OperationService,
-    fb: FormBuilder
-  ) {
+  constructor(operationService: OperationService, fb: FormBuilder) {
     super(operationService, fb);
   }
 

@@ -8,10 +8,7 @@ import { KeywordService } from '../../../core/services/keyword.service';
   templateUrl: './keywords.component.html',
 })
 export class KeywordsComponent extends BaseComponent {
-  constructor(
-    private readonly keywordService: KeywordService,
-    fb: FormBuilder
-  ) {
+  constructor(keywordService: KeywordService, fb: FormBuilder) {
     super(keywordService, fb);
   }
 }

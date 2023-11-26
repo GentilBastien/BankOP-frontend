@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DynamicTableComponent } from './dynamic-table/dynamic-table.component';
+import { TablePanelComponent } from './table-panel/table-panel.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DynamicTableComponent,
+    component: TablePanelComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DynamicTableRoutingModule {}
+export class TreeRoutingModule {}
