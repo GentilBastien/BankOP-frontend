@@ -9,7 +9,7 @@ import { ImportOperationsMapper } from '../mappers/import-operations/import-oper
 @Injectable({
   providedIn: 'root',
 })
-export class ImportService extends ApiCallService<ImportOperationDto> {
+export class ImportService extends ApiCallService<ImportOperationDto[]> {
   protected constructor(
     httpService: HttpClient,
     private readonly importOperationsMapper: ImportOperationsMapper
@@ -18,7 +18,7 @@ export class ImportService extends ApiCallService<ImportOperationDto> {
   }
 
   public fetch(importOperationDtos: ImportOperationDto[]): Observable<ImportOperation[]> {
-    return this.create<ImportOperationDto[]>(importOperationDtos).pipe(
+    return this.create(importOperationDtos).pipe(
       map((responseBody: ImportOperationDto[]) =>
         responseBody.map((importOperationDto: ImportOperationDto) =>
           this.importOperationsMapper.fromDto(importOperationDto)

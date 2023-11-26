@@ -29,7 +29,7 @@ export class ConfigurationFilterService extends ApiCallService<ConfigurationFilt
 
   public createConfigurationFilter(configurationFilter: ConfigurationFilter): Observable<ConfigurationFilterDto> {
     const configFilterDto: ConfigurationFilterDto = this.configurationFilterMapper.toDto(configurationFilter);
-    return this.create<ConfigurationFilterDto>(configFilterDto);
+    return this.create(configFilterDto);
   }
 
   public deleteConfigurationFilter(id: string): Observable<void> {

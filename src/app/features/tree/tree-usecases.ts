@@ -22,4 +22,16 @@ export class TreeUsecases {
   public changeSelectedTreeNode(selectedTreeNode: TreeNode | undefined): void {
     this.treeStore.changeSelectedTreeNode(selectedTreeNode);
   }
+
+  public add(): void {
+    this.treeStore.add();
+  }
+
+  public rename(newName: string): void {
+    this.treeStore.rename(newName);
+  }
+
+  public delete(): void {
+    this.treeStore.delete();
+  }
 }

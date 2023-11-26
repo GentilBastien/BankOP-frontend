@@ -4,6 +4,8 @@ import { DEFAULT_TREE_NODE, TreeNode } from '../../core/entities/tree-table/tree
 import { TreeService } from '../../core/services/tree.service';
 import { Tree } from '../../core/entities/tree-table/tree';
 import { returnVoid } from '../../shared/custom-operators/ReturnVoid';
+import { TableService } from '../../core/services/table.service';
+import { TableDto } from '../../core/dtos/table.dto';
 
 @Injectable()
 export class TreeStore {
@@ -15,7 +17,10 @@ export class TreeStore {
   );
   public selectedTreeNode$: Observable<TreeNode | undefined> = this.selectedTreeNodeSubject.asObservable();
 
-  constructor(private readonly treeService: TreeService) {}
+  constructor(
+    private readonly treeService: TreeService,
+    private readonly tableService: TableService
+  ) {}
 
   public refreshTreeNode(): Observable<void> {
     return this.treeService.fetch().pipe(
@@ -30,6 +35,36 @@ export class TreeStore {
       this.selectedTreeNodeSubject.next(undefined);
     } else {
       this.selectedTreeNodeSubject.next(selectedTreeNode);
+    }
+  }
+
+  public add(): void {
+    const treeNode: TreeNode | undefined = this.selectedTreeNodeSubject.getValue();
+    if (treeNode) {
+      const subTable: TableDto = {
+        name: 'new table',
+        idCategory: treeNode.table.id!,
+      };
+      this.tableService.createEntity(subTable);
+    }
+  }
+
+  public rename(newName: string): void {
+    const treeNode: TreeNode | undefined = this.selectedTreeNodeSubject.getValue();
+    if (treeNode) {
+      const subTable: TableDto = {
+        id: undefined,
+        idCategory: treeNode.table.id!,
+        name: newName,
+      };
+      this.tableService.updateEntity(subTable);
+    }
+  }
+
+  public delete(): void {
+    const treeNode: TreeNode | undefined = this.selectedTreeNodeSubject.getValue();
+    if (treeNode) {
+      this.tableService.deleteEntity(treeNode.table.id!.toString());
     }
   }
 }

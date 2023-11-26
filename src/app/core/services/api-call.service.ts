@@ -13,8 +13,12 @@ export abstract class ApiCallService<DTO> {
     this.endpointApi = baseEndpoint + endpoint;
   }
 
-  public create<DTO>(item: DTO): Observable<DTO> {
+  public create(item: DTO): Observable<DTO> {
     return this.httpService.post<DTO>(this.endpointApi, item);
+  }
+
+  public update(item: DTO): Observable<DTO> {
+    return this.httpService.put<DTO>(this.endpointApi, item);
   }
 
   public getById(id: string): Observable<DTO> {

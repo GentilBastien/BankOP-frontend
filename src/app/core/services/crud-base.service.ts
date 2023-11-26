@@ -27,6 +27,10 @@ export abstract class CrudBaseService extends ApiCallService<CrudBaseDto> {
     this.create(dto).subscribe();
   }
 
+  public updateEntity(dto: CrudBaseDto): void {
+    this.update(dto).subscribe();
+  }
+
   public deleteEntity(id: string): void {
     this.delete(id).subscribe();
   }

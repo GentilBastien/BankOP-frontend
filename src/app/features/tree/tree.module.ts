@@ -7,9 +7,10 @@ import { TreeUsecases } from './tree-usecases';
 import { TablePanelComponent } from './table-panel/table-panel.component';
 import { TableKeywordsComponent } from './table-keywords/table-keywords.component';
 import { TableTreeComponent } from './table-tree/table-tree.component';
+import { TableControlComponent } from './table-control/table-control.component';
 
 @NgModule({
-  declarations: [TableTreeComponent, TablePanelComponent, TableKeywordsComponent, TableTreeComponent],
+  declarations: [TableTreeComponent, TablePanelComponent, TableKeywordsComponent, TableTreeComponent, TableControlComponent],
   imports: [SharedModule, TreeRoutingModule],
   providers: [TreeStore, TreeUsecases],
 })
