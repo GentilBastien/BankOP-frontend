@@ -5,8 +5,6 @@ import { Injectable } from '@angular/core';
 import { ImportOperationDto } from '../dtos/import-operations/import-operation.dto';
 import { ImportOperation } from '../entities/import-operations/import-operation';
 import { ImportOperationsMapper } from '../mappers/import-operations/import-operations-mapper';
-import { OperationDtoMapper } from '../mappers/import-operations/operation-dto-mapper';
-import { OperationService } from './operation.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,9 +12,7 @@ import { OperationService } from './operation.service';
 export class ImportService extends ApiCallService<ImportOperationDto> {
   protected constructor(
     httpService: HttpClient,
-    private readonly importOperationsMapper: ImportOperationsMapper,
-    private readonly operationDtoMapper: OperationDtoMapper,
-    private readonly operationService: OperationService
+    private readonly importOperationsMapper: ImportOperationsMapper
   ) {
     super('import', httpService);
   }
